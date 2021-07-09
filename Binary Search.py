@@ -1,14 +1,11 @@
 import math
 
 def BinarySearch(List,searchItem,Index):
-    midpoint = (len(List)-1)/2
-    midpoint = (int(math.ceil(midpoint))) #math.ceil is used instead of round() as decimals with .5 round down with round()
-    itemValue = List[midpoint]
     
-    #print(List) #Debugging
-    #print("Start Index: " + str(Index)) #Debugging
-    #print("Midpoint: " + str(midpoint)) #Debugging
-    #print("Item Value: " + str(itemValue)) #Debugging
+    midpoint = (len(List)-1)/2 #-1 deals with python lists starting from 0 when calculating midpoint
+    midpoint = (int(math.ceil(midpoint))) #math.ceil is used instead of round() as decimals with .5 round down with round(), which is the opposite of what I want to happen
+    
+    itemValue = List[midpoint]
     
     if itemValue == searchItem:
         Index += midpoint
@@ -20,14 +17,12 @@ def BinarySearch(List,searchItem,Index):
     elif itemValue < searchItem:
         Index += midpoint+1 # +1 deals with python lists counting from 0
         
-        #print("Large - alteredIndex: " + str(Index)) #Debugging
-        
-        return (BinarySearch(List[midpoint + 1: len(List)],searchItem,Index))
+        return (BinarySearch(List[midpoint + 1: len(List)],searchItem,Index)) #List slicing is used to get rid of the section of the list that is unneeded
     
     elif itemValue > searchItem:
         return (BinarySearch(List[0:midpoint],searchItem,Index))
 
-Sequence = [
+Sequence = [ #Example array, feel free to change it
 2,
 3,
 4,
