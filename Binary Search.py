@@ -1,13 +1,8 @@
 import math
 import random
-#To work on alphanumeric text, to compare two values turn strings into array of numbers that relate to the letter and compare the numerical values to find if one value is greater than the other
 
 def BinarySearch(List,searchItem,Index):
-    if len(List) == 0:
-        return ("Not in list")
-    
-    midpoint = (len(List)-1)/2
-    midpoint = (int(math.ceil(midpoint))) #math.ceil is used instead of round() as decimals with .5 round down with round()
+    midpoint = math.floor((len(List)-1)/2)
     itemValue = List[midpoint]
 
 
@@ -26,6 +21,7 @@ def BinarySearch(List,searchItem,Index):
         return (BinarySearch(List[0:midpoint],searchItem,Index))
 
 def SortedNumListGenerator(NoLoop,MaxRandNumber):
+    
     def Quicksort (Sequence):
         #Lists  to append to
         SmallerThanPivot = []
