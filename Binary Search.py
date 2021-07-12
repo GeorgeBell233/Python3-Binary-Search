@@ -2,7 +2,11 @@ import math
 import random
 
 def BinarySearch(List,searchItem,Index):
-    midpoint = math.floor((len(List)-1)/2)
+    
+    if len(List) == 0: #Catches index out of range errors for search items above or below the range of numbers in the list
+        return ("Not in list")
+
+    midpoint = math.floor((len(List)-1)/2) #-1 deals with python arrays starting from 0
     itemValue = List[midpoint]
 
 
@@ -15,10 +19,10 @@ def BinarySearch(List,searchItem,Index):
 
     elif itemValue < searchItem:
         Index += midpoint+1 # +1 deals with python lists counting from 0        
-        return (BinarySearch(List[midpoint + 1: len(List)],searchItem,Index))
+        return (BinarySearch(List[midpoint + 1: len(List)],searchItem,Index)) #Uses list slicing to remove the first half of the list
     
     elif itemValue > searchItem:
-        return (BinarySearch(List[0:midpoint],searchItem,Index))
+        return (BinarySearch(List[0:midpoint],searchItem,Index)) #Uses list slicing to remove the second half of the list
 
 def SortedNumListGenerator(NoLoop,MaxRandNumber):
     
@@ -35,7 +39,7 @@ def SortedNumListGenerator(NoLoop,MaxRandNumber):
 
             for i in Sequence: 
                 
-                if i > pivot: #Uses if statements to seperate smaller than pivot/equal to pivot and larger than pivot into list
+                if i > pivot: #Uses if statements to seperate smaller than pivot/equal to pivot and larger than pivot into different lists
                     LargerThanPivot.append(i)
                 
                 elif i < pivot:
@@ -51,9 +55,10 @@ def SortedNumListGenerator(NoLoop,MaxRandNumber):
     for i in range(0,NoLoop):
         Sequence.append(random.randint(0,MaxRandNumber))
     
-    Sequence = Quicksort(Sequence)
+    Sequence = Quicksort(Sequence) #Sorts randomly generated list
     return Sequence
     
+
 Sequence = SortedNumListGenerator(100,100)
 print(Sequence)
 searchItem = float(input("Enter the search item "))
